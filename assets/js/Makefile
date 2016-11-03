@@ -20,7 +20,7 @@ ${TMIN}: ${T}
 	${NPM_BIN}/uglifyjs $> >$@
 
 ${T}: ${SOURCES}
-	${NPM_BIN}/rollup -c -f iife -g m:m >$@
+	${NPM_BIN}/rollup -c >$@
 
 
 

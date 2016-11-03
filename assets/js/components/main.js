@@ -1,4 +1,4 @@
-import m from "m";
+import m from "mithril";
 
 export let rootElement = document.querySelector("main");
 
