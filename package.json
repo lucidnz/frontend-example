@@ -1,0 +1,8 @@
+{
+    "dependencies": {
+        "buble": "0.14.x",
+        "rollup": "0.36.x",
+        "rollup-plugin-buble": "0.14.x",
+        "uglify-js": "2.7.x"
+    }
+}
