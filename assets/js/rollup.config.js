@@ -1,9 +1,9 @@
-import buble from 'rollup-plugin-buble';
+import buble from "rollup-plugin-buble";
 
 export default {
-  entry: './index.js',
+	entry: "./index.js",
 
-  plugins: [
-    buble()
-  ]
+	plugins: [
+		buble()
+	]
 }
