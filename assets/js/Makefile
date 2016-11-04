@@ -14,13 +14,16 @@ TMIN=           ${T:.js=.min.js}
 
 
 
-all: ${T} ${TMIN}
+all: $T ${TMIN}
 
-${TMIN}: ${T}
+${TMIN}: $T
 	${NPM_BIN}/uglifyjs $> >$@
 
-${T}: ${SOURCES}
+$T: $D ${SOURCES}
 	${NPM_BIN}/rollup -c >$@
+
+$D:
+	mkdir -p $D
 
 
 

@@ -1,15 +1,10 @@
 
 # [b]make(1)
 
-T=              ../../public/css/frontend-example.min.css
-E=              index.scss
-# SOURCES=        index.scss \
-                # test1.scss \
-                # test2.scss
-#
-# - or -
-#
 SOURCES!=       find * -name \*.scss
+E=              index.scss
+D=		../../public/css
+T=              ${D}/frontend-example.min.css
 
 
 
@@ -19,8 +14,11 @@ SOURCES!=       find * -name \*.scss
 
 all: $T
 
-$T: ${SOURCES}
+$T: $D ${SOURCES}
 	sassc -t compressed $E >$@
+
+$D:
+	mkdir -p $D
 
 
 

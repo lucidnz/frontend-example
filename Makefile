@@ -10,8 +10,3 @@ watch:
 	find assets -name \*.\* | entr ${MAKE}
 
 .include <bsd.subdir.mk>
-#
-# -or-
-#
-# ${MAKE} -C assets/css
-# ${MAKE} -C ...
