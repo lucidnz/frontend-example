@@ -5,8 +5,8 @@ NPM_BIN=        ../../node_modules/.bin
 
 SOURCES!=       find * -name \*.js
 D=              ../../public/js
-T=              ${D}/frontend-example.js
-TMIN=           ${T:.js=.min.js}
+T=              $(D)/frontend-example.js
+TMIN=           $(T:.js=.min.js)
 
 
 
@@ -14,13 +14,13 @@ TMIN=           ${T:.js=.min.js}
 
 
 
-all: $T ${TMIN}
+all: $T $(TMIN)
 
-${TMIN}: $T
-	${NPM_BIN}/uglifyjs $> >$@
+$(TMIN): $T
+	$(NPM_BIN)/uglifyjs $> >$@
 
-$T: $D ${SOURCES}
-	${NPM_BIN}/rollup -c >$@
+$T: $D $(SOURCES)
+	$(NPM_BIN)/rollup -c >$@
 
 $D:
 	mkdir -p $D
@@ -28,4 +28,4 @@ $D:
 
 
 clean:
-	rm -f ${T} ${TMIN}
+	rm -f $(T) $(TMIN)

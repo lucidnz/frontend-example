@@ -4,7 +4,7 @@
 SOURCES!=       find * -name \*.scss
 E=              index.scss
 D=		../../public/css
-T=              ${D}/frontend-example.min.css
+T=              $(D)/frontend-example.min.css
 
 
 
@@ -14,7 +14,7 @@ T=              ${D}/frontend-example.min.css
 
 all: $T
 
-$T: $D ${SOURCES}
+$T: $D $(SOURCES)
 	sassc -t compressed $E >$@
 
 $D:

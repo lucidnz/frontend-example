@@ -7,6 +7,6 @@ SUBDIR+=	assets/js
 .PHONY: watch
 
 watch:
-	find assets -name \*.\* | entr ${MAKE}
+	find assets -name \*.\* | entr $(MAKE)
 
 .include <bsd.subdir.mk>
