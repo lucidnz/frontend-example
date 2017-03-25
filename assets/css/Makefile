@@ -13,7 +13,7 @@ TARGET=			$(SOURCES_FINGERPRINT)_$(PROJECT_NAME).css
 
 .PHONY: all
 all: $(PUBLIC)/$(PROJECT_NAME).css
-	:
+	#
 
 $(PUBLIC)/$(PROJECT_NAME).css: $(PUBLIC)/$(TARGET)
 	ln -fs $(TARGET) $@

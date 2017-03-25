@@ -13,7 +13,7 @@ TARGET=			$(SOURCES_FINGERPRINT)_$(PROJECT_NAME).js
 
 .PHONY: all
 all: $(PUBLIC)/$(PROJECT_NAME).js
-	:
+	#
 
 $(PUBLIC)/$(PROJECT_NAME).js: $(PUBLIC)/$(TARGET)
 	ln -fs $(TARGET) $@
