@@ -1,26 +1,25 @@
 
 # [b]make(1)
 
-SOURCES!=       find * -name \*.scss
-E=              index.scss
-D=		../../public/css
-T=              $(D)/frontend-example.min.css
+PROJECT_NAME?=		frontend-example
+
+PUBLIC=			../../public/css
+SOURCES!=       	find * -name \*.scss
+SOURCES_FINGERPRINT!=	tar -cf - $(SOURCES) | md5sum | cut -c 1-16
+TARGET=			$(PUBLIC)/$(SOURCES_FINGERPRINT)_$(PROJECT_NAME).css
 
 
 
-.PHONY: all clean
+.PHONY: all
+all: $(TARGET)
+	:
 
+$(TARGET): $(SOURCES) $(PUBLIC)
+	sassc -t compressed index.scss $@
 
+$(PUBLIC):
+	mkdir -p $@
 
-all: $T
-
-$T: $D $(SOURCES)
-	sassc -t compressed $E >$@
-
-$D:
-	mkdir -p $D
-
-
-
+.PHONY: clean
 clean:
-	rm -f $T
+	rm -f $(PUBLIC)/????????????????_*.css

@@ -1,31 +1,26 @@
 
 # [b]make(1)
 
-NPM_BIN=        ../../node_modules/.bin
+PROJECT_NAME?=		frontend-example
 
-SOURCES!=       find * -name \*.js
-D=              ../../public/js
-T=              $(D)/frontend-example.js
-TMIN=           $(T:.js=.min.js)
-
-
-
-.PHONY: all clean
+NODE_BIN=		../../node_modules/.bin
+PUBLIC=			../../public/js
+SOURCES!=       	find * -name \*.js
+SOURCES_FINGERPRINT!=	tar -cf - $(SOURCES) | md5sum | cut -c 1-16
+TARGET=			$(PUBLIC)/$(SOURCES_FINGERPRINT)_$(PROJECT_NAME).js
 
 
 
-all: $T $(TMIN)
+.PHONY: all
+all: $(TARGET)
+	:
 
-$(TMIN): $T
-	$(NPM_BIN)/uglifyjs $> >$@
+$(TARGET): $(SOURCES) $(PUBLIC)
+	$(NODE_BIN)/rollup -c | $(NODE_BIN)/uglifyjs >$@
 
-$T: $D $(SOURCES)
-	$(NPM_BIN)/rollup -c >$@
+$(PUBLIC):
+	mkdir -p $@
 
-$D:
-	mkdir -p $D
-
-
-
+.PHONY: clean
 clean:
-	rm -f $(T) $(TMIN)
+	rm -f $(PUBLIC)/????????????????_*.js
