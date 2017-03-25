@@ -18,7 +18,7 @@ all: $(PUBLIC)/$(PROJECT_NAME).js
 $(PUBLIC)/$(PROJECT_NAME).js: $(PUBLIC)/$(TARGET)
 	ln -fs $(TARGET) $@
 
-$$(PUBLIC)/(TARGET): $(SOURCES) $(PUBLIC)
+$(PUBLIC)/$(TARGET): $(SOURCES) $(PUBLIC)
 	$(NODE_BIN)/rollup -c | $(NODE_BIN)/uglifyjs >$@
 
 $(PUBLIC):
@@ -26,4 +26,4 @@ $(PUBLIC):
 
 .PHONY: clean
 clean:
-	rm -f $(PUBLIC)/????????????????_*.js
+	rm -f $(PUBLIC)/*.js
