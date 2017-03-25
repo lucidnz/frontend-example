@@ -6,16 +6,20 @@ PROJECT_NAME?=		frontend-example
 PUBLIC=			../../public/css
 SOURCES!=       	find * -name \*.scss
 SOURCES_FINGERPRINT!=	tar -cf - $(SOURCES) | md5sum | cut -c 1-16
-TARGET=			$(PUBLIC)/$(SOURCES_FINGERPRINT)_$(PROJECT_NAME).css
+SOURCES_IN=		index.scss
+TARGET=			$(SOURCES_FINGERPRINT)_$(PROJECT_NAME).css
 
 
 
 .PHONY: all
-all: $(TARGET)
+all: $(PUBLIC)/$(PROJECT_NAME).css
 	:
 
-$(TARGET): $(SOURCES) $(PUBLIC)
-	sassc -t compressed index.scss $@
+$(PUBLIC)/$(PROJECT_NAME).css: $(PUBLIC)/$(TARGET)
+	ln -fs $(TARGET) $@
+
+$(PUBLIC)/$(TARGET): $(SOURCES) $(PUBLIC)
+	sassc -t compressed $(SOURCES_IN) $@
 
 $(PUBLIC):
 	mkdir -p $@

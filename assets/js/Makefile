@@ -7,15 +7,18 @@ NODE_BIN=		../../node_modules/.bin
 PUBLIC=			../../public/js
 SOURCES!=       	find * -name \*.js
 SOURCES_FINGERPRINT!=	tar -cf - $(SOURCES) | md5sum | cut -c 1-16
-TARGET=			$(PUBLIC)/$(SOURCES_FINGERPRINT)_$(PROJECT_NAME).js
+TARGET=			$(SOURCES_FINGERPRINT)_$(PROJECT_NAME).js
 
 
 
 .PHONY: all
-all: $(TARGET)
+all: $(PUBLIC)/$(PROJECT_NAME).js
 	:
 
-$(TARGET): $(SOURCES) $(PUBLIC)
+$(PUBLIC)/$(PROJECT_NAME).js: $(PUBLIC)/$(TARGET)
+	ln -fs $(TARGET) $@
+
+$$(PUBLIC)/(TARGET): $(SOURCES) $(PUBLIC)
 	$(NODE_BIN)/rollup -c | $(NODE_BIN)/uglifyjs >$@
 
 $(PUBLIC):
